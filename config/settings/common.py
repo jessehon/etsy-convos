@@ -32,6 +32,7 @@ DJANGO_APPS = (
     'django.contrib.admin',
 )
 THIRD_PARTY_APPS = (
+    'rest_framework',
 )
 
 # Apps specific for this project go here.
@@ -219,3 +220,5 @@ LOGGING = {
 }
 
 # Your common stuff: Below this line define 3rd party library settings
+REST_FRAMEWORK = {
+}
