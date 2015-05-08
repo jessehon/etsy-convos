@@ -10,6 +10,9 @@ class ConvoThread(models.Model):
     """
     subject = models.CharField(max_length=140)
 
+    def get_last_convo(self):
+        return self.convo_set.last()
+
 class Convo(models.Model):
     """
     Model that houses the main body of the message
@@ -24,5 +27,13 @@ class Convo(models.Model):
     created_at = CreationDateTimeField(_("Created at"), blank=True)
 
     @property
-    def excerpt(self):
+    def body_excerpt(self):
         return self.body[:49]+'...' if len(self.body) > 50 else self.body
+
+    def get_read_at_for(self, user):
+        if self.sender == user:
+            return self.sender_read_at
+        if self.recipient == user:
+            return self.recipient_read_at
+
+        return None
