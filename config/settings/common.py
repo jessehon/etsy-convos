@@ -13,7 +13,7 @@ from __future__ import absolute_import, unicode_literals
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 3  # (/a/b/myfile.py - 3 = /)
-APPS_DIR = ROOT_DIR.path('etsy-convos')
+APPS_DIR = ROOT_DIR.path('etsy_convos')
 
 env = environ.Env()
 
@@ -37,7 +37,7 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    'etsy-convos.convos',
+    'etsy_convos.convos',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -58,7 +58,7 @@ MIDDLEWARE_CLASSES = (
 # MIGRATIONS CONFIGURATION
 # ------------------------------------------------------------------------------
 MIGRATION_MODULES = {
-    'sites': 'etsy-convos.contrib.sites.migrations'
+    'sites': 'etsy_convos.contrib.sites.migrations'
 }
 
 # DEBUG
