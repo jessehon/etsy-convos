@@ -24,9 +24,3 @@ nosetests.xml
 *~
 *.swp
 *.swo
-
-# npm
-node_modules/
-
-# Compass
-.sass-cache
