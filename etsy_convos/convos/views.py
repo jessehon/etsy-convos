@@ -3,13 +3,13 @@ from rest_framework import viewsets
 from .models import *
 from .serializers import *
 
-class ConvoViewSet(viewsets.ModelViewSet):
-    queryset = Convo.objects.all()
-    serializer_class = ConvoSerializer
+class ConvoMessageViewSet(viewsets.ModelViewSet):
+    queryset = ConvoMessage.objects.all()
+    serializer_class = ConvoMessageSerializer
 
     def list(self, request, *args, **kwargs):
-        self.serializer_class = ConvoPreviewSerializer
-        return super(ConvoViewSet, self).list(self, request, *args, **kwargs)
+        self.serializer_class = ConvoMessagePreviewSerializer
+        return super(ConvoMessageViewSet, self).list(self, request, *args, **kwargs)
 
 class ConvoThreadViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ConvoThread.objects.all()

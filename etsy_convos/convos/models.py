@@ -10,18 +10,18 @@ class ConvoThread(models.Model):
     """
     subject = models.CharField(max_length=140)
 
-    def get_last_convo(self):
-        return self.convo_set.last()
+    def get_last_message(self):
+        return self.convomessages.last()
 
-class Convo(models.Model):
+class ConvoMessage(models.Model):
     """
     Model that houses the main body of the message
     """
-    thread = models.ForeignKey(ConvoThread)
+    thread = models.ForeignKey(ConvoThread, related_name='convomessages')
     body = models.TextField()
-    sender = models.ForeignKey(User, related_name='convos_sent')
+    sender = models.ForeignKey(User, related_name='convomessages_sent')
     sender_read_at = models.DateTimeField(_("Sender read at"), blank=True, null=True)
-    recipient = models.ForeignKey(User, related_name='convos_received')
+    recipient = models.ForeignKey(User, related_name='convomessages_received')
     recipient_read_at = models.DateTimeField(_("Recipient read at"), blank=True, null=True)
 
     created_at = CreationDateTimeField(_("Created at"), blank=True)

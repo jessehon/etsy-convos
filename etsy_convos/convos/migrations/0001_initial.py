@@ -15,15 +15,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Convo',
+            name='ConvoMessage',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('body', models.TextField()),
                 ('sender_read_at', models.DateTimeField(null=True, verbose_name='Sender read at', blank=True)),
                 ('recipient_read_at', models.DateTimeField(null=True, verbose_name='Recipient read at', blank=True)),
                 ('created_at', django_extensions.db.fields.CreationDateTimeField(default=django.utils.timezone.now, verbose_name='Created at', editable=False, blank=True)),
-                ('recipient', models.ForeignKey(related_name='convos_received', to=settings.AUTH_USER_MODEL)),
-                ('sender', models.ForeignKey(related_name='convos_sent', to=settings.AUTH_USER_MODEL)),
+                ('recipient', models.ForeignKey(related_name='convomessages_received', to=settings.AUTH_USER_MODEL)),
+                ('sender', models.ForeignKey(related_name='convomessages_sent', to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
@@ -34,8 +34,8 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AddField(
-            model_name='convo',
+            model_name='convomessage',
             name='thread',
-            field=models.ForeignKey(to='convos.ConvoThread'),
+            field=models.ForeignKey(related_name='convomessages', to='convos.ConvoThread'),
         ),
     ]

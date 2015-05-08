@@ -13,8 +13,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 router = routers.DefaultRouter()
-router.register(r'convos', ConvoViewSet)
-router.register(r'convo-threads', ConvoThreadViewSet)
+router.register(r'messages', ConvoMessageViewSet)
+router.register(r'threads', ConvoThreadViewSet)
 
 urlpatterns = patterns('',  # noqa
     # Django Admin (Comment the next line to disable the admin)

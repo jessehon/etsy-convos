@@ -2,34 +2,34 @@
 from rest_framework import serializers
 from .models import *
 
-class BaseConvoSerializer(serializers.ModelSerializer):
+class BaseConvoMessageSerializer(serializers.ModelSerializer):
     read_at = serializers.SerializerMethodField()
 
     class Meta:
-        model = Convo
+        model = ConvoMessage
 
     def get_read_at(self, obj):
         return obj.get_read_at_for(self.context['request'].user)
 
-class ConvoSerializer(BaseConvoSerializer):
-    class Meta(BaseConvoSerializer.Meta):
+class ConvoMessageSerializer(BaseConvoMessageSerializer):
+    class Meta(BaseConvoMessageSerializer.Meta):
         fields = ('id', 'sender', 'recipient', 'body', 'read_at',)
 
-class ConvoPreviewSerializer(BaseConvoSerializer):
-    class Meta(BaseConvoSerializer.Meta):
+class ConvoMessagePreviewSerializer(BaseConvoMessageSerializer):
+    class Meta(BaseConvoMessageSerializer.Meta):
         fields = ('id', 'sender', 'recipient', 'body_excerpt', 'read_at',)
 
 class BaseConvoThreadSerializer(serializers.ModelSerializer):
-    convos = ConvoPreviewSerializer(source='convo_set', many=True)
-    last_convo = ConvoPreviewSerializer(source='get_last_convo')
+    messages = ConvoMessagePreviewSerializer(source='convomessages', many=True)
+    last_message = ConvoMessagePreviewSerializer(source='get_last_message')
 
     class Meta:
         model = ConvoThread
 
 class ConvoThreadSerializer(BaseConvoThreadSerializer):
     class Meta(BaseConvoThreadSerializer.Meta):
-        fields = ('id', 'subject', 'convos')
+        fields = ('id', 'subject', 'messages')
 
 class ConvoThreadPreviewSerializer(BaseConvoThreadSerializer):
     class Meta(BaseConvoThreadSerializer.Meta):
-        fields = ('id', 'subject', 'last_convo')
+        fields = ('id', 'subject', 'last_message')
