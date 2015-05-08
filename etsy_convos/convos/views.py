@@ -7,6 +7,14 @@ class ConvoViewSet(viewsets.ModelViewSet):
     queryset = Convo.objects.all()
     serializer_class = ConvoSerializer
 
-class ConvoThreadViewSet(viewsets.ModelViewSet):
+    def list(self, request, *args, **kwargs):
+        self.serializer_class = ConvoPreviewSerializer
+        return super(ConvoViewSet, self).list(self, request, *args, **kwargs)
+
+class ConvoThreadViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ConvoThread.objects.all()
     serializer_class = ConvoThreadSerializer
+
+    def list(self, request, *args, **kwargs):
+        self.serializer_class = ConvoThreadPreviewSerializer
+        return super(ConvoThreadViewSet, self).list(self, request, *args, **kwargs)
