@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import *
+from .serializers import *
 
-# Create your views here.
+class ConvoViewSet(viewsets.ModelViewSet):
+    queryset = Convo.objects.all()
+    serializer_class = ConvoSerializer
