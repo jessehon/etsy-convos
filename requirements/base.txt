@@ -9,9 +9,6 @@ whitenoise==1.0.6
 # Models
 django-model-utils==2.2
 
-# Images
-Pillow==2.8.1
-
 # For the persistence stores
 psycopg2==2.6
 
