@@ -20,9 +20,9 @@ class ConvoMessage(models.Model):
     thread = models.ForeignKey(ConvoThread, related_name='convomessages')
     body = models.TextField()
     sender = models.ForeignKey(User, related_name='convomessages_sent')
-    sender_read_at = models.DateTimeField(_("Sender read at"), blank=True, null=True)
+    sender_read = models.BooleanField(_("Sender read"), default=False)
     recipient = models.ForeignKey(User, related_name='convomessages_received')
-    recipient_read_at = models.DateTimeField(_("Recipient read at"), blank=True, null=True)
+    recipient_read = models.BooleanField(_("Recipient read"), default=False)
 
     created_at = CreationDateTimeField(_("Created at"), blank=True)
 
@@ -30,10 +30,10 @@ class ConvoMessage(models.Model):
     def body_excerpt(self):
         return self.body[:49]+'...' if len(self.body) > 50 else self.body
 
-    def get_read_at_for(self, user):
+    def get_is_read_for(self, user):
         if self.sender == user:
-            return self.sender_read_at
+            return self.sender_read
         if self.recipient == user:
-            return self.recipient_read_at
+            return self.recipient_read
 
         return None

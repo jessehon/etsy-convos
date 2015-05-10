@@ -3,19 +3,19 @@ from rest_framework import serializers
 from .models import *
 
 class BaseConvoMessageSerializer(serializers.ModelSerializer):
-    read_at = serializers.SerializerMethodField()
+    is_read = serializers.SerializerMethodField()
 
     class Meta:
         model = ConvoMessage
 
-    def get_read_at(self, obj):
-        return obj.get_read_at_for(self.context['request'].user)
+    def get_is_read(self, obj):
+        return obj.get_is_read_for(self.context['request'].user)
 
 class ConvoMessageSerializer(BaseConvoMessageSerializer):
     subject = serializers.CharField(source='thread.subject')
 
     class Meta(BaseConvoMessageSerializer.Meta):
-        fields = ('id', 'sender', 'recipient', 'subject', 'body', 'read_at',)
+        fields = ('id', 'sender', 'recipient', 'subject', 'body', 'is_read',)
 
     def create(self, validated_data):
         thread_data = validated_data.get('thread', None)
@@ -25,11 +25,11 @@ class ConvoMessageSerializer(BaseConvoMessageSerializer):
 
 class ConvoMessageNestedSerializer(BaseConvoMessageSerializer):
     class Meta(BaseConvoMessageSerializer.Meta):
-        fields = ('id', 'sender', 'recipient', 'body', 'read_at',)
+        fields = ('id', 'sender', 'recipient', 'body', 'is_read',)
 
 class ConvoMessageNestedPreviewSerializer(BaseConvoMessageSerializer):
     class Meta(BaseConvoMessageSerializer.Meta):
-        fields = ('id', 'sender', 'recipient', 'body_excerpt', 'read_at',)
+        fields = ('id', 'sender', 'recipient', 'body_excerpt', 'is_read',)
 
 class BaseConvoThreadSerializer(serializers.ModelSerializer):
     messages = ConvoMessageNestedPreviewSerializer(source='convomessages', many=True)
