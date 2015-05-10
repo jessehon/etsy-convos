@@ -38,6 +38,12 @@ class ConvoMessageNestedViewSet(NestedViewSetMixin,
     queryset = ConvoMessage.objects.all()
     serializer_class = ConvoMessageNestedSerializer
 
+    def perform_create(self, serializer):
+        thread_query_dict = self.get_parents_query_dict()
+        thread_id = thread_query_dict['thread']
+        thread = ConvoThread.objects.get(id=thread_id)
+        serializer.save(thread=thread)
+
     def list(self, request, *args, **kwargs):
         self.serializer_class = ConvoMessageNestedPreviewSerializer
         return super(ConvoMessageNestedViewSet, self).list(self, request, *args, **kwargs)
