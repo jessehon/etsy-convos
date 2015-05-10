@@ -7,14 +7,25 @@ from django.conf.urls.static import static
 
 from etsy_convos.convos.views import *
 from rest_framework import routers, serializers, viewsets
+from rest_framework_extensions.routers import ExtendedSimpleRouter
 
 # Comment the next two lines to disable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
-router = routers.DefaultRouter()
+router = ExtendedSimpleRouter()
 router.register(r'messages', ConvoMessageViewSet)
-router.register(r'threads', ConvoThreadViewSet)
+threads_routes = router.register(
+    r'threads',
+    ConvoThreadViewSet,
+    base_name='thread'
+)
+threads_routes.register(
+    r'messages',
+    ConvoMessageViewSet,
+    base_name='thread-message',
+    parents_query_lookups=['thread']
+)
 
 urlpatterns = patterns('',  # noqa
     # Django Admin (Comment the next line to disable the admin)
