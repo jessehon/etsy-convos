@@ -22,7 +22,7 @@ threads_routes = router.register(
 )
 threads_routes.register(
     r'messages',
-    ConvoMessageViewSet,
+    ConvoMessageNestedViewSet,
     base_name='thread-message',
     parents_query_lookups=['thread']
 )

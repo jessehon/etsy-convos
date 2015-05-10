@@ -22,7 +22,7 @@ class ConvoMessageNestedViewSet(NestedViewSetMixin,
 
     def list(self, request, *args, **kwargs):
         self.serializer_class = ConvoMessageNestedPreviewSerializer
-        return super(ConvoMessageViewSet, self).list(self, request, *args, **kwargs)
+        return super(ConvoMessageNestedViewSet, self).list(self, request, *args, **kwargs)
 
 class ConvoThreadViewSet(NestedViewSetMixin, viewsets.ReadOnlyModelViewSet):
     queryset = ConvoThread.objects.all()
