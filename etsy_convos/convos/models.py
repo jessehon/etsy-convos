@@ -37,3 +37,9 @@ class ConvoMessage(models.Model):
             return self.recipient_read
 
         return None
+
+    def set_is_read_for(self, user, is_read):
+        if self.sender.pk == user.pk:
+            self.sender_read = is_read
+        if self.recipient.pk == user.pk:
+            self.recipient_read = is_read
