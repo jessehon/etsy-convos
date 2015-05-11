@@ -20,6 +20,7 @@ class CreateMessagesTest(APITestCase):
         }
         expected = {
             "id": 8,
+            'thread': 4,
             "subject": "Nunc feugiat mi a tellus consequat imperdiet.",
             "sender": 1,
             "recipient": 2,
@@ -62,6 +63,7 @@ class ReadMessagesTest(APITestCase):
         response = self.client.get(url)
         expected = {
             "id": 1,
+            'thread': 1,
             "subject": "Sed cursus ante dapibus diam.",
             "sender": 1,
             "recipient": 2,
@@ -135,6 +137,7 @@ class UpdateMessagesTest(APITestCase):
         url = '/api/messages/2/read/'
         expected = {
             "id": 2,
+            'thread': 1,
             "subject": "Sed cursus ante dapibus diam.",
             "sender": 2,
             "recipient": 1,
@@ -149,6 +152,7 @@ class UpdateMessagesTest(APITestCase):
         url = '/api/messages/1/unread/'
         expected = {
             "id": 1,
+            'thread': 1,
             "subject": "Sed cursus ante dapibus diam.",
             "sender": 1,
             "recipient": 2,

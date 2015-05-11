@@ -15,8 +15,8 @@ class ConvoMessageSerializer(BaseConvoMessageSerializer):
     subject = serializers.CharField(source='thread.subject')
 
     class Meta(BaseConvoMessageSerializer.Meta):
-        fields = ('id', 'sender', 'recipient', 'subject', 'body', 'is_read',)
-        read_only_fields = ('sender',)
+        fields = ('id', 'thread', 'sender', 'recipient', 'subject', 'body', 'is_read',)
+        read_only_fields = ('thread', 'sender',)
 
     def create(self, validated_data):
         thread_data = validated_data.get('thread', None)
