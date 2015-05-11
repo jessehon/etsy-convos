@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+from etsy_convos.convos.models import *
 
 class CreateMessagesTest(APITestCase):
     fixtures = ['test_data/users.json', 'test_data/convo_threads.json', 'test_data/convo_messages.json']
@@ -159,3 +160,16 @@ class UpdateMessagesTest(APITestCase):
         response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, expected)
+
+class DeleteMessagesTest(APITestCase):
+    fixtures = ['test_data/users.json', 'test_data/convo_threads.json', 'test_data/convo_messages.json']
+
+    def setUp(self):
+        self.client.login(username='john', password='password')
+
+    def test_delete_message(self):
+        url = '/api/messages/1/'
+        response = self.client.delete(url)
+        instance = ConvoMessage.objects.get(id=1)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertTrue(instance.sender_deleted_at)

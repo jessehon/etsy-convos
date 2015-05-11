@@ -25,6 +25,7 @@ class ConvoMessageViewSet(NestedViewSetMixin,
             instance.sender_deleted_at = datetime.now()
         elif user.pk == instance.recipient.pk:
             instance.recipient_deleted_at = datetime.now()
+        instance.save()
 
     @detail_route(methods=['post'])
     def read(self, request, pk=None):
