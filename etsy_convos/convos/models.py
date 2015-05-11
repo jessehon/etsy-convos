@@ -57,14 +57,14 @@ class ConvoMessageQuerySet(models.query.QuerySet):
         return self.filter(recipient=user)
 
 class ConvoMessageManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return ConvoMessageQuerySet(self.model)
 
     def __getattr__(self, attr, *args):
         try:
             return getattr(self.__class__, attr, *args)
         except AttributeError:
-            return getattr(self.get_query_set(), attr, *args)
+            return getattr(self.get_queryset(), attr, *args)
 
 class ConvoMessage(models.Model):
     """
