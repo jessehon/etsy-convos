@@ -3,6 +3,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 from rest_framework_extensions.mixins import NestedViewSetMixin
+from datetime import datetime
 from .models import *
 from .serializers import *
 
@@ -17,6 +18,13 @@ class ConvoMessageViewSet(NestedViewSetMixin,
     def perform_create(self, serializer):
         sender = self.request.user
         serializer.save(sender=sender)
+
+    def perform_destroy(self, instance):
+        user = self.request.user
+        if user.pk == instance.sender.pk:
+            instance.sender_deleted_at = datetime.now()
+        elif user.pk == instance.recipient.pk:
+            instance.recipient_deleted_at = datetime.now()
 
     @detail_route(methods=['post'])
     def read(self, request, pk=None):
