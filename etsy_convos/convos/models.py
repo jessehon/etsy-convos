@@ -98,7 +98,7 @@ class ConvoMessage(models.Model):
     Model that houses the main body of the message
     """
     thread = models.ForeignKey(ConvoThread, related_name='convomessages')
-    body = models.TextField()
+    body = models.CharField(max_length=64000)
     sender = models.ForeignKey(User, related_name='convomessages_sent')
     sender_read = models.BooleanField(_("Sender read"), default=False)
     sender_deleted_at = models.DateTimeField(_("Sender deleted at"), blank=True, null=True)
