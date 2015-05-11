@@ -92,14 +92,7 @@ class ReadMessagesTest(APITestCase):
                 "recipient": 1,
                 "body_excerpt": "Fusce nec tellus sed augue semper porta. Mauris m...",
                 "is_read": False
-            },
-            {
-                "id": 3,
-                "sender": 1,
-                "recipient": 2,
-                "body_excerpt": "Pellentesque nibh. Aenean quam. In scelerisque se...",
-                "is_read": False
-            },
+            }
         ]
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
