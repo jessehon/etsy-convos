@@ -25,8 +25,10 @@ class ConvoMessage(models.Model):
     body = models.TextField()
     sender = models.ForeignKey(User, related_name='convomessages_sent')
     sender_read = models.BooleanField(_("Sender read"), default=False)
+    sender_deleted_at = models.DateTimeField(_("Sender deleted at"), blank=True, null=True)
     recipient = models.ForeignKey(User, related_name='convomessages_received')
     recipient_read = models.BooleanField(_("Recipient read"), default=False)
+    recipient_deleted_at = models.DateTimeField(_("Recipient deleted at"), blank=True, null=True)
 
     created_at = CreationDateTimeField(_("Created at"), blank=True)
 
