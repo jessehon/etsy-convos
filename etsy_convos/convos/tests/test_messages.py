@@ -131,3 +131,31 @@ class UpdateMessagesTest(APITestCase):
         }
         response = self.client.put(url, data)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_read_message(self):
+        url = '/api/messages/3/read/'
+        expected = {
+            "id": 3,
+            "subject": "Sed cursus ante dapibus diam.",
+            "sender": 1,
+            "recipient": 2,
+            "body": """Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa.""",
+            "is_read": True
+        }
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, expected)
+
+    def test_unread_message(self):
+        url = '/api/messages/1/unread/'
+        expected = {
+            "id": 1,
+            "subject": "Sed cursus ante dapibus diam.",
+            "sender": 1,
+            "recipient": 2,
+            "body": """Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris.""",
+            "is_read": False
+        }
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, expected)
