@@ -72,6 +72,13 @@ You can now run the usual Django ``migrate`` and ``runserver`` command::
 
     $ python manage.py runserver
 
+Testing
+------------
+
+After completing above, you can start the test runner by::
+
+    $ python manage.py test
+
 Deployment
 ------------
 
