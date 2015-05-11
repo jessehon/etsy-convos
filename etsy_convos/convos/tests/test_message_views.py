@@ -132,13 +132,13 @@ class UpdateMessagesTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_read_message(self):
-        url = '/api/messages/3/read/'
+        url = '/api/messages/2/read/'
         expected = {
-            "id": 3,
+            "id": 2,
             "subject": "Sed cursus ante dapibus diam.",
-            "sender": 1,
-            "recipient": 2,
-            "body": """Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa.""",
+            "sender": 2,
+            "recipient": 1,
+            "body": """Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero.""",
             "is_read": True
         }
         response = self.client.post(url)
