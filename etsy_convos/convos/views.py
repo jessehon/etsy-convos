@@ -71,6 +71,10 @@ class ConvoThreadViewSet(NestedViewSetMixin, viewsets.ReadOnlyModelViewSet):
     queryset = ConvoThread.objects.all()
     serializer_class = ConvoThreadSerializer
 
+    def get_queryset(self):
+        queryset = super(ConvoThreadViewSet, self).get_queryset()
+        return queryset.active_for(self.request.user)
+
     def list(self, request, *args, **kwargs):
         self.serializer_class = ConvoThreadPreviewSerializer
         return super(ConvoThreadViewSet, self).list(self, request, *args, **kwargs)

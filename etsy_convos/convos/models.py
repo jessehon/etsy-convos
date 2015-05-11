@@ -5,16 +5,21 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import CreationDateTimeField, ModificationDateTimeField
 
-class ConvoThreadManager(models.Manager):
+class ConvoThreadQuerySet(models.query.QuerySet):
+    def active_for(self, user):
+        """
+        Returns all threads that have at least one active (not deleted) message
+        """
+        messages = ConvoMessage.objects.active_for(user)
+        return self.filter(convomessages__in=messages).distinct().order_by('id')
+
     def inbox_for(self, user):
         """
         Returns all threads that have at least one active (not deleted) message and
         contains at least a message that was received by the given user
         """
         messages = ConvoMessage.objects.active_for(user).received_by(user)
-        return self.filter(
-            messages__in=messages
-        )
+        return self.filter(convomessages__in=messages).distinct().order_by('id')
 
     def outbox_for(self, user):
         """
@@ -22,9 +27,18 @@ class ConvoThreadManager(models.Manager):
         contains at least a message that was sent by the given user
         """
         messages = ConvoMessage.objects.active_for(user).sent_by(user)
-        return self.filter(
-            messages__in=messages
-        )
+        return self.filter(convomessages__in=messages).distinct().order_by('id')
+
+class ConvoThreadManager(models.Manager):
+    def get_queryset(self):
+        return ConvoThreadQuerySet(self.model)
+
+    def __getattr__(self, attr, *args):
+        try:
+            return getattr(self.__class__, attr, *args)
+        except AttributeError:
+            return getattr(self.get_queryset(), attr, *args)
+
 
 class ConvoThread(models.Model):
     """
