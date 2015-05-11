@@ -1,8 +1,30 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.db.models import Q
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import CreationDateTimeField, ModificationDateTimeField
+
+class ConvoThreadManager(models.Manager):
+    def inbox_for(self, user):
+        """
+        Returns all threads that have at least one active (not deleted) message and
+        contains at least a message that was received by the given user
+        """
+        messages = ConvoMessage.objects.active_for(user).received_by(user)
+        return self.filter(
+            messages__in=messages
+        )
+
+    def outbox_for(self, user):
+        """
+        Returns all threads that have at least one active (not deleted) message and
+        contains at least a message that was sent by the given user
+        """
+        messages = ConvoMessage.objects.active_for(user).sent_by(user)
+        return self.filter(
+            messages__in=messages
+        )
 
 class ConvoThread(models.Model):
     """
@@ -12,10 +34,33 @@ class ConvoThread(models.Model):
 
     def get_last_message(self):
         return self.convomessages.last()
+    objects = ConvoThreadManager()
 
     def get_participants(self):
         message = self.get_last_message()
         return User.objects.filter(pk__in=[message.sender.pk, message.recipient.pk])
+
+class ConvoMessageQuerySet(models.query.QuerySet):
+    def active_for(self, user):
+        active_sent_by = Q(sender=user) & Q(sender_deleted_at__isnull=True)
+        active_received_by = Q(recipient=user) & Q(recipient_deleted_at__isnull=True)
+        return self.filter(active_sent_by | active_received_by)
+
+    def sent_by(self, user):
+        return self.filter(sender=user)
+
+    def received_by(self, user):
+        return self.filter(recipient=user)
+
+class ConvoMessageManager(models.Manager):
+    def get_query_set(self):
+        return ConvoMessageQuerySet(self.model)
+
+    def __getattr__(self, attr, *args):
+        try:
+            return getattr(self.__class__, attr, *args)
+        except AttributeError:
+            return getattr(self.get_query_set(), attr, *args)
 
 class ConvoMessage(models.Model):
     """
@@ -31,6 +76,8 @@ class ConvoMessage(models.Model):
     recipient_deleted_at = models.DateTimeField(_("Recipient deleted at"), blank=True, null=True)
 
     created_at = CreationDateTimeField(_("Created at"), blank=True)
+
+    objects = ConvoMessageManager()
 
     @property
     def body_excerpt(self):
