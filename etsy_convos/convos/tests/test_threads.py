@@ -35,7 +35,7 @@ class ReadThreadsTest(APITestCase):
                     "sender": 1,
                     "recipient": 2,
                     "body_excerpt": "Pellentesque nibh. Aenean quam. In scelerisque se...",
-                    "is_read": True
+                    "is_read": False
                 }
             },
             {
@@ -46,7 +46,7 @@ class ReadThreadsTest(APITestCase):
                     "sender": 1,
                     "recipient": 3,
                     "body_excerpt": "Aenean quam. In scelerisque sem at dolor. Maecena...",
-                    "is_read": True
+                    "is_read": False
                 }
             },
             {
@@ -57,7 +57,7 @@ class ReadThreadsTest(APITestCase):
                     "sender": 1,
                     "recipient": 2,
                     "body_excerpt": "Suspendisse in justo eu magna luctus suscipit. Se...",
-                    "is_read": True
+                    "is_read": False
                 }
             }
         ]
@@ -90,7 +90,7 @@ class ReadThreadsTest(APITestCase):
                     "sender": 1,
                     "recipient": 2,
                     "body_excerpt": "Pellentesque nibh. Aenean quam. In scelerisque se...",
-                    "is_read": True
+                    "is_read": False
                 }
             ]
         }

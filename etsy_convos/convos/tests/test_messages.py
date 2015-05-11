@@ -92,7 +92,7 @@ class ReadMessagesTest(APITestCase):
                 "sender": 1,
                 "recipient": 2,
                 "body_excerpt": "Pellentesque nibh. Aenean quam. In scelerisque se...",
-                "is_read": True
+                "is_read": False
             },
         ]
         response = self.client.get(url)
