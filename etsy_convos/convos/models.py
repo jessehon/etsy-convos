@@ -58,7 +58,8 @@ class ConvoThread(models.Model):
     FOLDER_CHOICES = (INBOX, OUTBOX)
 
     subject = models.CharField(max_length=140)
-
+    last_message_at = models.DateTimeField(_("Last message at"), blank=True, null=True)
+    
     objects = ConvoThreadManager()
 
     def get_last_message_for(self, user):
