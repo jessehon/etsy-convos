@@ -21,7 +21,7 @@ Additionally, convos are grouped by threads, so the data model needs to show if 
 Wiki
 ----------------------
 
-Refer to wiki for details on implementation [Wiki] [wiki]
+Refer to wiki for details on implementation `wiki`_
 
 Getting up and running
 ----------------------
@@ -58,7 +58,7 @@ You can then access the admin using your staff/superuser account::
 
     127.0.0.1:8000/admin/
 
-Or access the API directly with any user account through [Messages API] [messagesapi], [Threads API] [threadsapi], and [Thread messages API] [threadmessagesapi]::
+Or access the API directly with any user account through `Messages API`_, `Threads API`_, and `Thread messages API`_::
 
 Testing
 ------------
@@ -124,7 +124,7 @@ DJANGO_SECRET_KEY                       SECRET_KEY                  CHANGEME!!! 
 
 * TODO: Add vendor-added settings in another table
 
-[wiki]: https://github.com/jessehon/etsy-convos/wiki/Home
-[messagesapi]: https://github.com/jessehon/etsy-convos/wiki/Messages-API
-[threadmessagesapi]: https://github.com/jessehon/etsy-convos/wiki/Thread-Messages-API
-[threadsapi]: https://github.com/jessehon/etsy-convos/wiki/Threads-API
+.. _wiki: https://github.com/jessehon/etsy-convos/wiki/Home
+.. _Messages API: https://github.com/jessehon/etsy-convos/wiki/Messages-API
+.. _Thread messages API: https://github.com/jessehon/etsy-convos/wiki/Thread-Messages-API
+.. _Threads API: https://github.com/jessehon/etsy-convos/wiki/Threads-API
