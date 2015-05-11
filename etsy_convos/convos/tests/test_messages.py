@@ -103,3 +103,31 @@ class ReadMessagesTest(APITestCase):
         url = '/api/threads/1/messages/1/'
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+class UpdateMessagesTest(APITestCase):
+    fixtures = ['test_data/users.json', 'test_data/convo_threads.json', 'test_data/convo_messages.json']
+
+    def setUp(self):
+        self.client.login(username='john', password='password')
+
+    def test_update_message_not_allowed(self):
+        url = '/api/messages/1/'
+        data = {
+            "sender": 1,
+            "recipient": 2,
+            "subject": "Sed cursus ante dapibus diam.",
+            "body": "dummy content"
+        }
+        response = self.client.put(url, data)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_update_thread_message_not_allowed(self):
+        url = '/api/threads/1/messages/1/'
+        data = {
+            "sender": 1,
+            "recipient": 2,
+            "subject": "Sed cursus ante dapibus diam.",
+            "body": "dummy content"
+        }
+        response = self.client.put(url, data)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
