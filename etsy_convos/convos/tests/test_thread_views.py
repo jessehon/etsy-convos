@@ -79,3 +79,14 @@ class ReadThreadsTest(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, expected)
+
+class ThreadPermissionsTest(APITestCase):
+    fixtures = ['test_data/users.json', 'test_data/convo_threads.json', 'test_data/convo_messages.json']
+
+    def setUp(self):
+        self.client.login(username='bob', password='password')
+
+    def test_view_other_users_thread_detail(self):
+        url = '/api/threads/1/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

@@ -171,3 +171,19 @@ class DeleteMessagesTest(APITestCase):
         instance = ConvoMessage.objects.get(id=1)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertTrue(instance.sender_deleted_at)
+
+class MessagePermissionsTest(APITestCase):
+    fixtures = ['test_data/users.json', 'test_data/convo_threads.json', 'test_data/convo_messages.json']
+
+    def setUp(self):
+        self.client.login(username='bob', password='password')
+
+    def test_view_other_users_message_detail(self):
+        url = '/api/messages/1/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_view_other_users_thread_message_detail(self):
+        url = '/api/threads/1/messages/1/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
