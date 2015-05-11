@@ -18,28 +18,10 @@ Etsy members use a feature called Convos to send short messages to each other, s
 
 Additionally, convos are grouped by threads, so the data model needs to show if the convo was in reply to a previous convo. (Replies also share the same subject line as previous convos in the thread.)
 
-LICENSE: BSD
+Wiki
+----------------------
 
-Settings
-------------
-
-etsy_convos relies extensively on environment settings which **will not work with Apache/mod_wsgi setups**. It has been deployed successfully with both Gunicorn/Nginx and even uWSGI/Nginx.
-
-For configuration purposes, the following table maps the 'etsy_convos' environment variables to their Django setting:
-
-======================================= =========================== ============================================== ===========================================
-Environment Variable                    Django Setting              Development Default                            Production Default
-======================================= =========================== ============================================== ===========================================
-DJANGO_AWS_ACCESS_KEY_ID                AWS_ACCESS_KEY_ID           n/a                                            raises error
-DJANGO_AWS_SECRET_ACCESS_KEY            AWS_SECRET_ACCESS_KEY       n/a                                            raises error
-DJANGO_AWS_STORAGE_BUCKET_NAME          AWS_STORAGE_BUCKET_NAME     n/a                                            raises error
-DJANGO_CACHES                           CACHES (default)            locmem                                         memcached
-DJANGO_DATABASES                        DATABASES (default)         See code                                       See code
-DJANGO_DEBUG                            DEBUG                       True                                           False
-DJANGO_SECRET_KEY                       SECRET_KEY                  CHANGEME!!!                                    raises error
-======================================= =========================== ============================================== ===========================================
-
-* TODO: Add vendor-added settings in another table
+Refer to wiki for details on implementation [Wiki] [wiki]
 
 Getting up and running
 ----------------------
@@ -71,6 +53,12 @@ You can now run the usual Django ``migrate`` and ``runserver`` command::
     $ python manage.py migrate
 
     $ python manage.py runserver
+
+You can then access the admin using your staff/superuser account::
+
+    127.0.0.1:8000/admin/
+
+Or access the API directly with any user account through [Messages API] [messagesapi], [Threads API] [threadsapi], and [Thread messages API] [threadmessagesapi]::
 
 Testing
 ------------
@@ -112,3 +100,31 @@ Run these commands to deploy the project to Heroku:
     heroku run python manage.py check --deploy
     heroku run python manage.py createsuperuser
     heroku open
+
+LICENSE: BSD
+
+Settings
+------------
+
+etsy_convos relies extensively on environment settings which **will not work with Apache/mod_wsgi setups**. It has been deployed successfully with both Gunicorn/Nginx and even uWSGI/Nginx.
+
+For configuration purposes, the following table maps the 'etsy_convos' environment variables to their Django setting:
+
+======================================= =========================== ============================================== ===========================================
+Environment Variable                    Django Setting              Development Default                            Production Default
+======================================= =========================== ============================================== ===========================================
+DJANGO_AWS_ACCESS_KEY_ID                AWS_ACCESS_KEY_ID           n/a                                            raises error
+DJANGO_AWS_SECRET_ACCESS_KEY            AWS_SECRET_ACCESS_KEY       n/a                                            raises error
+DJANGO_AWS_STORAGE_BUCKET_NAME          AWS_STORAGE_BUCKET_NAME     n/a                                            raises error
+DJANGO_CACHES                           CACHES (default)            locmem                                         memcached
+DJANGO_DATABASES                        DATABASES (default)         See code                                       See code
+DJANGO_DEBUG                            DEBUG                       True                                           False
+DJANGO_SECRET_KEY                       SECRET_KEY                  CHANGEME!!!                                    raises error
+======================================= =========================== ============================================== ===========================================
+
+* TODO: Add vendor-added settings in another table
+
+[wiki]: https://github.com/jessehon/etsy-convos/wiki/Home
+[messagesapi]: https://github.com/jessehon/etsy-convos/wiki/Messages-API
+[threadmessagesapi]: https://github.com/jessehon/etsy-convos/wiki/Thread-Messages-API
+[threadsapi]: https://github.com/jessehon/etsy-convos/wiki/Threads-API
