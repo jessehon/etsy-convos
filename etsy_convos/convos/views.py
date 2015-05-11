@@ -6,6 +6,7 @@ from rest_framework_extensions.mixins import NestedViewSetMixin
 from django.utils import timezone
 from .models import *
 from .serializers import *
+from .filters import *
 
 class ConvoMessageViewSet(NestedViewSetMixin,
         mixins.CreateModelMixin,
@@ -14,6 +15,7 @@ class ConvoMessageViewSet(NestedViewSetMixin,
         viewsets.GenericViewSet):
     queryset = ConvoMessage.objects.all()
     serializer_class = ConvoMessageSerializer
+    filter_backends = (ActiveForUserFilter,)
 
     def perform_create(self, serializer):
         sender = self.request.user
@@ -49,6 +51,7 @@ class ConvoMessageNestedViewSet(NestedViewSetMixin,
         viewsets.GenericViewSet):
     queryset = ConvoMessage.objects.all()
     serializer_class = ConvoMessageNestedSerializer
+    filter_backends = (ActiveForUserFilter,)
 
     def get_parent_thread_object(self):
         thread_query_dict = self.get_parents_query_dict()
@@ -70,10 +73,7 @@ class ConvoMessageNestedViewSet(NestedViewSetMixin,
 class ConvoThreadViewSet(NestedViewSetMixin, viewsets.ReadOnlyModelViewSet):
     queryset = ConvoThread.objects.all()
     serializer_class = ConvoThreadSerializer
-
-    def get_queryset(self):
-        queryset = super(ConvoThreadViewSet, self).get_queryset()
-        return queryset.active_for(self.request.user)
+    filter_backends = (ActiveForUserFilter, ThreadFolderFilter,)
 
     def list(self, request, *args, **kwargs):
         self.serializer_class = ConvoThreadPreviewSerializer

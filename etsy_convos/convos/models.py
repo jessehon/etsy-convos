@@ -2,10 +2,19 @@
 from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import CreationDateTimeField, ModificationDateTimeField
 
 class ConvoThreadQuerySet(models.query.QuerySet):
+
+    def folder_for(self, folder, user):
+        if folder == ConvoThread.INBOX:
+            return self.inbox_for(user)
+        if folder == ConvoThread.OUTBOX:
+            return self.outbox_for(user)
+        raise ValidationError("Folder must be either inbox or outbox")
+
     def active_for(self, user):
         """
         Returns all threads that have at least one active (not deleted) message
@@ -44,6 +53,10 @@ class ConvoThread(models.Model):
     """
     Model used to group related messages together
     """
+    INBOX = 'inbox'
+    OUTBOX = 'outbox'
+    FOLDER_CHOICES = (INBOX, OUTBOX)
+
     subject = models.CharField(max_length=140)
 
     objects = ConvoThreadManager()
