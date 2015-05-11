@@ -31,10 +31,10 @@ class ReadThreadsTest(APITestCase):
                 "id": 1,
                 "subject": "Sed cursus ante dapibus diam.",
                 "last_message": {
-                    "id": 3,
-                    "sender": 1,
-                    "recipient": 2,
-                    "body_excerpt": "Pellentesque nibh. Aenean quam. In scelerisque se...",
+                    "id": 2,
+                    "sender": 2,
+                    "recipient": 1,
+                    "body_excerpt": "Fusce nec tellus sed augue semper porta. Mauris m...",
                     "is_read": False
                 }
             },
@@ -46,17 +46,6 @@ class ReadThreadsTest(APITestCase):
                     "sender": 1,
                     "recipient": 3,
                     "body_excerpt": "Aenean quam. In scelerisque sem at dolor. Maecena...",
-                    "is_read": False
-                }
-            },
-            {
-                "id": 3,
-                "subject": "Morbi lectus risus",
-                "last_message": {
-                    "id": 7,
-                    "sender": 1,
-                    "recipient": 2,
-                    "body_excerpt": "Suspendisse in justo eu magna luctus suscipit. Se...",
                     "is_read": False
                 }
             }
@@ -83,13 +72,6 @@ class ReadThreadsTest(APITestCase):
                     "sender": 2,
                     "recipient": 1,
                     "body_excerpt": "Fusce nec tellus sed augue semper porta. Mauris m...",
-                    "is_read": False
-                },
-                {
-                    "id": 3,
-                    "sender": 1,
-                    "recipient": 2,
-                    "body_excerpt": "Pellentesque nibh. Aenean quam. In scelerisque se...",
                     "is_read": False
                 }
             ]

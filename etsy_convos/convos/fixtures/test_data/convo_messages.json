@@ -30,7 +30,9 @@
             "sender":1,
             "recipient":2,
             "sender_read":false,
-            "recipient_read":false
+            "recipient_read":false,
+            "sender_deleted_at":"2015-05-10T00:00:00.000Z",
+            "recipient_deleted_at":null
         },
         "model":"convos.convomessage",
         "pk":3
@@ -66,7 +68,9 @@
             "sender":1,
             "recipient":2,
             "sender_read":false,
-            "recipient_read":false
+            "recipient_read":false,
+            "sender_deleted_at":"2015-05-10T00:00:00.000Z",
+            "recipient_deleted_at":null
         },
         "model":"convos.convomessage",
         "pk":6
@@ -78,7 +82,9 @@
             "sender":1,
             "recipient":2,
             "sender_read":false,
-            "recipient_read":false
+            "recipient_read":false,
+            "sender_deleted_at":"2015-05-10T00:00:00.000Z",
+            "recipient_deleted_at":null
         },
         "model":"convos.convomessage",
         "pk":7
