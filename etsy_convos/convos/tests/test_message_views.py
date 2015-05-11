@@ -71,6 +71,11 @@ class ReadMessagesTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, expected)
 
+    def test_view_deleted_message_detail_not_allowed(self):
+        url = '/api/messages/3/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
     def test_view_thread_messages(self):
         url = '/api/threads/1/messages/'
         expected = [
