@@ -19,7 +19,11 @@ class ConvoMessageViewSet(NestedViewSetMixin,
 
     def perform_create(self, serializer):
         sender = self.request.user
-        serializer.save(sender=sender)
+        instance = serializer.save(sender=sender)
+
+        thread = instance.thread
+        thread.last_message_at = instance.created_at
+        thread.save()
 
     def perform_destroy(self, instance):
         user = self.request.user
@@ -64,7 +68,10 @@ class ConvoMessageNestedViewSet(NestedViewSetMixin,
         sender = self.request.user
         participants = thread.get_participants()
         recipient = participants.exclude(pk=sender.pk).first()
-        serializer.save(thread=thread, sender=sender, recipient=recipient)
+        instance = serializer.save(thread=thread, sender=sender, recipient=recipient)
+
+        thread.last_message_at = instance.created_at
+        thread.save()
 
     def list(self, request, *args, **kwargs):
         self.serializer_class = ConvoMessageNestedPreviewSerializer

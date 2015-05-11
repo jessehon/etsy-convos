@@ -80,18 +80,18 @@ class ReadMessagesTest(APITestCase):
         url = '/api/threads/1/messages/'
         expected = [
             {
-                "id": 1,
-                "sender": 1,
-                "recipient": 2,
-                "body_excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscin...",
-                "is_read": True
-            },
-            {
                 "id": 2,
                 "sender": 2,
                 "recipient": 1,
                 "body_excerpt": "Fusce nec tellus sed augue semper porta. Mauris m...",
                 "is_read": False
+            },
+            {
+                "id": 1,
+                "sender": 1,
+                "recipient": 2,
+                "body_excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscin...",
+                "is_read": True
             }
         ]
         response = self.client.get(url)

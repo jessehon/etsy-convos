@@ -19,8 +19,9 @@ class ConvoThreadQuerySet(models.query.QuerySet):
         """
         Returns all threads that have at least one active (not deleted) message
         """
+        # dont have time to implement a better query. Django ORM doesnt make 'select not exists' easy
         messages = ConvoMessage.objects.active_for(user)
-        return self.filter(convomessages__in=messages).distinct().order_by('id')
+        return self.filter(convomessages__in=messages).distinct().order_by('-last_message_at')
 
     def inbox_for(self, user):
         """
@@ -28,7 +29,7 @@ class ConvoThreadQuerySet(models.query.QuerySet):
         contains at least a message that was received by the given user
         """
         messages = ConvoMessage.objects.active_for(user).received_by(user)
-        return self.filter(convomessages__in=messages).distinct().order_by('id')
+        return self.filter(convomessages__in=messages).distinct().order_by('-last_message_at')
 
     def outbox_for(self, user):
         """
@@ -36,7 +37,7 @@ class ConvoThreadQuerySet(models.query.QuerySet):
         contains at least a message that was sent by the given user
         """
         messages = ConvoMessage.objects.active_for(user).sent_by(user)
-        return self.filter(convomessages__in=messages).distinct().order_by('id')
+        return self.filter(convomessages__in=messages).distinct().order_by('-last_message_at')
 
 class ConvoThreadManager(models.Manager):
     def get_queryset(self):
@@ -59,8 +60,11 @@ class ConvoThread(models.Model):
 
     subject = models.CharField(max_length=140)
     last_message_at = models.DateTimeField(_("Last message at"), blank=True, null=True)
-    
+
     objects = ConvoThreadManager()
+
+    class Meta:
+        ordering = ['-last_message_at']
 
     def get_last_message_for(self, user):
         return self.get_messages_for(user).last()
@@ -110,6 +114,9 @@ class ConvoMessage(models.Model):
     created_at = CreationDateTimeField(_("Created at"), blank=True)
 
     objects = ConvoMessageManager()
+
+    class Meta:
+        ordering = ['-id']
 
     @property
     def body_excerpt(self):

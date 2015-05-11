@@ -1,21 +1,24 @@
 [
     {
         "fields":{
-            "subject":"Sed cursus ante dapibus diam."
+            "subject":"Sed cursus ante dapibus diam.",
+            "last_message_at":"2015-05-08T00:00:00Z"
         },
         "model":"convos.convothread",
         "pk":1
     },
     {
         "fields":{
-            "subject":"Class aptent taciti sociosqu ad litora torquent per conubia nostra"
+            "subject":"Class aptent taciti sociosqu ad litora torquent per conubia nostra",
+            "last_message_at":"2015-05-09T00:00:00Z"
         },
         "model":"convos.convothread",
         "pk":2
     },
     {
         "fields":{
-            "subject":"Morbi lectus risus"
+            "subject":"Morbi lectus risus",
+            "last_message_at":"2015-05-10T00:00:00Z"
         },
         "model":"convos.convothread",
         "pk":3

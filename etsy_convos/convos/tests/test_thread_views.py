@@ -28,17 +28,6 @@ class ReadThreadsTest(APITestCase):
         url = '/api/threads/'
         expected = [
             {
-                "id": 1,
-                "subject": "Sed cursus ante dapibus diam.",
-                "last_message": {
-                    "id": 2,
-                    "sender": 2,
-                    "recipient": 1,
-                    "body_excerpt": "Fusce nec tellus sed augue semper porta. Mauris m...",
-                    "is_read": False
-                }
-            },
-            {
                 "id": 2,
                 "subject": "Class aptent taciti sociosqu ad litora torquent per conubia nostra",
                 "last_message": {
@@ -46,6 +35,17 @@ class ReadThreadsTest(APITestCase):
                     "sender": 1,
                     "recipient": 3,
                     "body_excerpt": "Aenean quam. In scelerisque sem at dolor. Maecena...",
+                    "is_read": False
+                }
+            },
+            {
+                "id": 1,
+                "subject": "Sed cursus ante dapibus diam.",
+                "last_message": {
+                    "id": 2,
+                    "sender": 2,
+                    "recipient": 1,
+                    "body_excerpt": "Fusce nec tellus sed augue semper porta. Mauris m...",
                     "is_read": False
                 }
             }
@@ -61,18 +61,18 @@ class ReadThreadsTest(APITestCase):
             "subject": "Sed cursus ante dapibus diam.",
             "messages": [
                 {
-                    "id": 1,
-                    "sender": 1,
-                    "recipient": 2,
-                    "body_excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscin...",
-                    "is_read": True
-                },
-                {
                     "id": 2,
                     "sender": 2,
                     "recipient": 1,
                     "body_excerpt": "Fusce nec tellus sed augue semper porta. Mauris m...",
                     "is_read": False
+                },
+                {
+                    "id": 1,
+                    "sender": 1,
+                    "recipient": 2,
+                    "body_excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscin...",
+                    "is_read": True
                 }
             ]
         }
