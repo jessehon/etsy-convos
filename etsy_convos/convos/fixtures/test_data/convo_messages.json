@@ -1,0 +1,93 @@
+[
+    {
+        "fields":{
+            "body":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris.",
+            "thread":1,
+            "sender":1,
+            "recipient":2,
+            "sender_read":true,
+            "recipient_read":false,
+            "created_at":"2015-05-10T00:00:00.000Z"
+        },
+        "model":"convos.convomessage",
+        "pk":1
+    },
+    {
+        "fields":{
+            "body":"Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero.",
+            "thread":1,
+            "sender":2,
+            "recipient":1,
+            "sender_read":true,
+            "recipient_read":false,
+            "created_at":"2015-05-10T00:00:00.000Z"
+        },
+        "model":"convos.convomessage",
+        "pk":2
+    },
+    {
+        "fields":{
+            "body":"Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa.",
+            "thread":1,
+            "sender":1,
+            "recipient":2,
+            "sender_read":true,
+            "recipient_read":false,
+            "created_at":"2015-05-10T00:00:00.000Z"
+        },
+        "model":"convos.convomessage",
+        "pk":3
+    },
+    {
+        "fields":{
+            "body":"Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis.",
+            "thread":2,
+            "sender":3,
+            "recipient":1,
+            "sender_read":true,
+            "recipient_read":false,
+            "created_at":"2015-05-10T00:00:00.000Z"
+        },
+        "model":"convos.convomessage",
+        "pk":4
+    },
+    {
+        "fields":{
+            "body":"Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet.",
+            "thread":2,
+            "sender":1,
+            "recipient":3,
+            "sender_read":true,
+            "recipient_read":false,
+            "created_at":"2015-05-10T00:00:00.000Z"
+        },
+        "model":"convos.convomessage",
+        "pk":5
+    },
+    {
+        "fields":{
+            "body":"Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec.",
+            "thread":3,
+            "sender":1,
+            "recipient":2,
+            "sender_read":true,
+            "recipient_read":false,
+            "created_at":"2015-05-10T00:00:00.000Z"
+        },
+        "model":"convos.convomessage",
+        "pk":6
+    },
+    {
+        "fields":{
+            "body":"Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam.",
+            "thread":3,
+            "sender":1,
+            "recipient":2,
+            "sender_read":true,
+            "recipient_read":false,
+            "created_at":"2015-05-10T00:00:00.000Z"
+        },
+        "model":"convos.convomessage",
+        "pk":7
+    }
+]

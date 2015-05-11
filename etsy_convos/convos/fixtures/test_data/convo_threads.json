@@ -1,0 +1,23 @@
+[
+    {
+        "fields":{
+            "subject":"Sed cursus ante dapibus diam."
+        },
+        "model":"convos.convothread",
+        "pk":1
+    },
+    {
+        "fields":{
+            "subject":"Class aptent taciti sociosqu ad litora torquent per conubia nostra"
+        },
+        "model":"convos.convothread",
+        "pk":2
+    },
+    {
+        "fields":{
+            "subject":"Morbi lectus risus"
+        },
+        "model":"convos.convothread",
+        "pk":3
+    }
+]
