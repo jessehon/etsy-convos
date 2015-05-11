@@ -6,8 +6,7 @@
             "sender":1,
             "recipient":2,
             "sender_read":true,
-            "recipient_read":true,
-            "created_at":"2015-05-10T00:00:00.000Z"
+            "recipient_read":true
         },
         "model":"convos.convomessage",
         "pk":1
@@ -19,8 +18,7 @@
             "sender":2,
             "recipient":1,
             "sender_read":true,
-            "recipient_read":false,
-            "created_at":"2015-05-10T00:00:00.000Z"
+            "recipient_read":false
         },
         "model":"convos.convomessage",
         "pk":2
@@ -32,8 +30,7 @@
             "sender":1,
             "recipient":2,
             "sender_read":false,
-            "recipient_read":false,
-            "created_at":"2015-05-10T00:00:00.000Z"
+            "recipient_read":false
         },
         "model":"convos.convomessage",
         "pk":3
@@ -45,8 +42,7 @@
             "sender":3,
             "recipient":1,
             "sender_read":false,
-            "recipient_read":false,
-            "created_at":"2015-05-10T00:00:00.000Z"
+            "recipient_read":false
         },
         "model":"convos.convomessage",
         "pk":4
@@ -58,8 +54,7 @@
             "sender":1,
             "recipient":3,
             "sender_read":false,
-            "recipient_read":false,
-            "created_at":"2015-05-10T00:00:00.000Z"
+            "recipient_read":false
         },
         "model":"convos.convomessage",
         "pk":5
@@ -71,8 +66,7 @@
             "sender":1,
             "recipient":2,
             "sender_read":false,
-            "recipient_read":false,
-            "created_at":"2015-05-10T00:00:00.000Z"
+            "recipient_read":false
         },
         "model":"convos.convomessage",
         "pk":6
@@ -84,8 +78,7 @@
             "sender":1,
             "recipient":2,
             "sender_read":false,
-            "recipient_read":false,
-            "created_at":"2015-05-10T00:00:00.000Z"
+            "recipient_read":false
         },
         "model":"convos.convomessage",
         "pk":7
