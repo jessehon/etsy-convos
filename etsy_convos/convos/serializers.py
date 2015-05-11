@@ -16,6 +16,7 @@ class ConvoMessageSerializer(BaseConvoMessageSerializer):
 
     class Meta(BaseConvoMessageSerializer.Meta):
         fields = ('id', 'sender', 'recipient', 'subject', 'body', 'is_read',)
+        read_only_fields = ('sender',)
 
     def create(self, validated_data):
         thread_data = validated_data.get('thread', None)
@@ -26,6 +27,7 @@ class ConvoMessageSerializer(BaseConvoMessageSerializer):
 class ConvoMessageNestedSerializer(BaseConvoMessageSerializer):
     class Meta(BaseConvoMessageSerializer.Meta):
         fields = ('id', 'sender', 'recipient', 'body', 'is_read',)
+        read_only_fields = ('sender', 'recipient',)
 
 class ConvoMessageNestedPreviewSerializer(BaseConvoMessageSerializer):
     class Meta(BaseConvoMessageSerializer.Meta):

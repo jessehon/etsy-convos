@@ -14,6 +14,10 @@ class ConvoMessageViewSet(NestedViewSetMixin,
     queryset = ConvoMessage.objects.all()
     serializer_class = ConvoMessageSerializer
 
+    def perform_create(self, serializer):
+        sender = self.request.user
+        serializer.save(sender=sender)
+
     @detail_route(methods=['post'])
     def read(self, request, pk=None):
         message = self.get_object()
@@ -37,11 +41,18 @@ class ConvoMessageNestedViewSet(NestedViewSetMixin,
     queryset = ConvoMessage.objects.all()
     serializer_class = ConvoMessageNestedSerializer
 
-    def perform_create(self, serializer):
+    def get_parent_thread_object(self):
         thread_query_dict = self.get_parents_query_dict()
         thread_id = thread_query_dict['thread']
         thread = ConvoThread.objects.get(id=thread_id)
-        serializer.save(thread=thread)
+        return thread
+
+    def perform_create(self, serializer):
+        thread = self.get_parent_thread_object()
+        sender = self.request.user
+        participants = thread.get_participants()
+        recipient = participants.exclude(pk=sender.pk).first()
+        serializer.save(thread=thread, sender=sender, recipient=recipient)
 
     def list(self, request, *args, **kwargs):
         self.serializer_class = ConvoMessageNestedPreviewSerializer

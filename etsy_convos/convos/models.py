@@ -13,6 +13,10 @@ class ConvoThread(models.Model):
     def get_last_message(self):
         return self.convomessages.last()
 
+    def get_participants(self):
+        message = self.get_last_message()
+        return User.objects.filter(pk__in=[message.sender.pk, message.recipient.pk])
+
 class ConvoMessage(models.Model):
     """
     Model that houses the main body of the message
