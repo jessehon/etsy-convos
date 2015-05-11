@@ -34,11 +34,19 @@ class ConvoMessageNestedPreviewSerializer(BaseConvoMessageSerializer):
         fields = ('id', 'sender', 'recipient', 'body_excerpt', 'is_read',)
 
 class BaseConvoThreadSerializer(serializers.ModelSerializer):
-    messages = ConvoMessageNestedPreviewSerializer(source='convomessages', many=True)
-    last_message = ConvoMessageNestedPreviewSerializer(source='get_last_message')
+    messages = serializers.SerializerMethodField()
+    last_message = serializers.SerializerMethodField()
 
     class Meta:
         model = ConvoThread
+
+    def get_messages(self, obj):
+        messages = obj.get_messages_for(self.context['request'].user)
+        return ConvoMessageNestedPreviewSerializer(instance=messages, context=self.context, many=True).data
+
+    def get_last_message(self, obj):
+        message = obj.get_last_message_for(self.context['request'].user)
+        return ConvoMessageNestedPreviewSerializer(instance=message, context=self.context).data
 
 class ConvoThreadSerializer(BaseConvoThreadSerializer):
     class Meta(BaseConvoThreadSerializer.Meta):

@@ -32,13 +32,17 @@ class ConvoThread(models.Model):
     """
     subject = models.CharField(max_length=140)
 
-    def get_last_message(self):
-        return self.convomessages.last()
     objects = ConvoThreadManager()
 
+    def get_last_message_for(self, user):
+        return self.get_messages_for(user).last()
+
     def get_participants(self):
-        message = self.get_last_message()
+        message = self.convomessages.first()
         return User.objects.filter(pk__in=[message.sender.pk, message.recipient.pk])
+
+    def get_messages_for(self, user):
+        return self.convomessages.active_for(user)
 
 class ConvoMessageQuerySet(models.query.QuerySet):
     def active_for(self, user):
