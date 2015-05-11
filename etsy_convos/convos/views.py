@@ -33,7 +33,6 @@ class ConvoMessageViewSet(NestedViewSetMixin,
 class ConvoMessageNestedViewSet(NestedViewSetMixin,
         mixins.ListModelMixin,
         mixins.CreateModelMixin,
-        mixins.RetrieveModelMixin,
         viewsets.GenericViewSet):
     queryset = ConvoMessage.objects.all()
     serializer_class = ConvoMessageNestedSerializer
